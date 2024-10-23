@@ -29,7 +29,9 @@ export default function LogInPage() {
                   placeholder={"Password"}
                   name={"password"}
                 />
-                <BlueButton text={"Login"} />
+                <Link href={"/dashboardpage"}>
+                  <BlueButton text={"Login"} />
+                </Link>
               </div>
 
               <div className="flex items-center justify-center">
