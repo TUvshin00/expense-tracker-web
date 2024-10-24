@@ -33,7 +33,9 @@ export const SignUpPage = () => {
                 placeholder={"Re-password"}
                 name={"password"}
               />
-              <BlueButton text={"Sign up"} />
+              <Link href={"/"}>
+                <BlueButton text={"Sign up"} />
+              </Link>
             </div>
             <div className="flex items-center justify-center">
               <button>

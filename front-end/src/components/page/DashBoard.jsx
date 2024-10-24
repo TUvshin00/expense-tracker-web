@@ -1,11 +1,13 @@
 "use client";
 import Link from "next/link";
-import { Card, Icon1, RecordSVG } from "../svg";
+import { Icon1, RecordSVG } from "../svg";
+import { IncomeCard } from "../needfull/IncomeCard";
+import { ExpenseCard } from "../needfull/idnex";
 
 export const DashBoard = () => {
   return (
     <main>
-      <div className="px-[12px] py-4 flex md:px-[120px] justify-between md:justify-between items-center">
+      <div className="px-[12px] py-4 flex md:px-[120px] justify-between md:justify-around items-center">
         <div className="flex items-center">
           <div className="flex items-center gap-2 md:gap-6">
             <Icon1 />
@@ -42,8 +44,10 @@ export const DashBoard = () => {
         </div>
       </div>
       <div>
-        <div>
-          <Card />
+        <div className=" flex flex-col items-center md:flex md:flex-row  md:justify-center gap-6">
+          <IncomeCard />
+          <IncomeCard />
+          <ExpenseCard />
         </div>
       </div>
     </main>
