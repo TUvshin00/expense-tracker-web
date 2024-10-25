@@ -4,3 +4,4 @@ export * from "./IncomeCard";
 export * from "./ExpenseCard";
 export * from "./GeldCard";
 export * from "./Header";
+export * from './Addrecord'
