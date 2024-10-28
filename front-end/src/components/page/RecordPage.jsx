@@ -1,14 +1,14 @@
 "use client";
 
-import { Addrecord, Header } from "../needfull/idnex";
+import { AddCategory, Addrecord, Header } from "../needfull/idnex";
 import { Eye, Plus } from "../svg";
 
 export const RecordPage = () => {
   return (
     <div className=" ">
       <Header />
-      <div className="bg-[#F3F4F6] w-full h-screen">
-        <div className="flex max-w-[1440px] w-full px-[120px] m-auto gap-6 ">
+      <div className="bg-[#F3F4F6] w-full h-screen ">
+        <div className="flex max-w-[1440px] w-full px-[120px] m-auto gap-6 py-20 ">
           <div className="flex justify-center">
             <div className="rounded-md border-[#E5E7EB] border-[1px] bg-[#F9FAFB] p-6 ">
               <div className="flex flex-col gap-6">
@@ -29,7 +29,7 @@ export const RecordPage = () => {
                       <Addrecord />
                     </div>
                     <form method="dialog" className="modal-backdrop">
-                      <button>close</button>
+                      <button onClick={() => document.close}>close</button>
                     </form>
                   </dialog>
                 </div>
@@ -87,10 +87,23 @@ export const RecordPage = () => {
                       <h3 className="font-normal">Food & Drink</h3>
                     </div>
                     <div>
-                      <button className="flex items-center gap-3 ">
+                      <button
+                        className=" text-black  h-9 rounded-xl flex  gap-3 items-center"
+                        onClick={() =>
+                          document.getElementById("my_modal_2").showModal()
+                        }
+                      >
                         <Plus />
-                        <h3> Add category</h3>
+                        Add Category
                       </button>
+                      <dialog id="my_modal_2" className="modal">
+                        <div className="modal-box  w-full p-0">
+                          <AddCategory />
+                        </div>
+                        <form method="dialog" className="modal-backdrop">
+                          <button onClick={() => document.close}>close</button>
+                        </form>
+                      </dialog>
                     </div>
                   </div>
                 </div>

@@ -76,14 +76,14 @@ export const Addrecord = ({ text }) => {
               <input
                 type="text"
                 placeholder="Write here"
-                className="bg-[#D1D5DB] w-[292px] h-6 text-gray-400 rounded-lg"
+                className="bg-[#D1D5DB] w-[292px] h-6 text-gray-400 rounded-lg  text-start"
               />
             </div>
             <div>
               <h3>Note</h3>
               <input
                 type="text"
-                className="bg-[#D1D5DB] w-[292px] h-[200px] text-gray-400 rounded-lg"
+                className="bg-[#D1D5DB] w-[292px] h-[200px] text-gray-400 rounded-lg text-start"
               />
             </div>
           </div>
