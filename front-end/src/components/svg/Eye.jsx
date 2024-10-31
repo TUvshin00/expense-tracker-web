@@ -1,6 +1,6 @@
 export const Eye = () => {
   return (
-    <div>
+    <div className="swap-off">
       <svg
         width="20"
         height="20"

@@ -6,3 +6,4 @@ export * from "./WhiteText";
 export * from "./Chip";
 export * from "./Eye";
 export * from "./Plus";
+export * from "./Leadingicon";

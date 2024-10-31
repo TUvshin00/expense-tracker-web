@@ -1,7 +1,7 @@
 "use client";
 
 import { AddCategory, Addrecord, Header } from "../needfull/idnex";
-import { Eye, Plus } from "../svg";
+import { Eye, Leadingicon, Plus } from "../svg";
 
 export const RecordPage = () => {
   return (
@@ -83,7 +83,11 @@ export const RecordPage = () => {
                       </button>
                     </div>
                     <div className="flex gap-3 items-center">
-                      <Eye />
+                      <label className="swap">
+                        <input type="checkbox" />
+                        <Leadingicon className="swap-off fill-current" />
+                        <Eye className="swap-on fill-current" />
+                      </label>
                       <h3 className="font-normal">Food & Drink</h3>
                     </div>
                     <div>
@@ -116,7 +120,7 @@ export const RecordPage = () => {
                 <h3>Last 30 Days</h3>
               </div>
               <div className="dropdown dropdown-bottom dropdown-end">
-                <div tabIndex={0} role="button" className="btn m-1">
+                <div tabIndex={0} role="button" className="btn m-1 bg-white">
                   Newest fisrt
                 </div>
                 <ul
