@@ -1,86 +1,46 @@
-import express from "express";
+import express, { request, response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import fs from "fs";
-import { error } from "console";
+import { neon } from "@neondatabase/serverless";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const port = 8000;
 const server = express();
-
 server.use(bodyParser.json());
 server.use(cors());
 
-server.get("/", (request, response) => {
-  response.send("Hello GET huselt irlee");
+const sql = neon(`${process.env.BACKEND_URL}`);
+
+console.log(BACKEND_URL);
+
+server.post("/category", async (request, response) => {
+  const { name, category_icon, icon_color } = request.body;
+  try {
+    const category =
+      await sql`INSERT INTO category (name, category_icon, icon_color) 
+      VALUES (${name},  ${category_icon}, ${icon_color})
+      RETURNING *
+ `;
+
+    response
+      .status(201)
+      .json({ message: "category orlooo ", category: category[0] });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ message: "category nemegdej chadsangui " });
+  }
 });
+server.get("/category", async (request, response) => {
+  try {
+    const category = await sql`SELECT * FROM category ORDER BY createdat DESC`;
 
-server.post("/sign-in", (request, response) => {
-  const { name, password } = request.body;
-
-  fs.readFile("./data/user.json", "utf-8", (readError, data) => {
-    if (readError) {
-      response.json({
-        success: false,
-        error: error,
-      });
-    }
-
-    let savedData = data ? JSON.parse(data) : [];
-
-    const registeredUser = savedData.filter(
-      (user) => user.name === name && user.password === password
-    );
-
-    if (registeredUser.length > 0) {
-      response.json({
-        success: true,
-        user: registeredUser[0],
-      });
-    } else {
-      response.json({
-        success: false,
-      });
-    }
-  });
-});
-
-server.post("/sign-up", (request, response) => {
-  const { name, password, email } = request.body;
-
-  fs.readFile("./data/user.json", "utf-8", (readError, data) => {
-    let savedData = data ? JSON.parse(data) : [];
-
-    if (readError) {
-      response.json({
-        success: false,
-        error: error,
-      });
-    }
-
-    console.log(data);
-
-    const newUser = {
-      id: Date.now().toString(),
-      name: name,
-      password: password,
-      email: email,
-    };
-    savedData.push(newUser);
-
-    fs.writeFile("./data/user.json", JSON.stringify(savedData), (error) => {
-      if (error) {
-        response.json({
-          success: false,
-          error: error,
-        });
-      } else {
-        response.json({
-          success: true,
-          user: newUser,
-        });
-      }
-    });
-  });
+    response.status(201).json(category);
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ message: "category nemegdej chadsangui " });
+  }
 });
 
 server.listen(port, () => {

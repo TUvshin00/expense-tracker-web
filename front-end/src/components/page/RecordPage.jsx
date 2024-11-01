@@ -1,9 +1,31 @@
 "use client";
 
-import { AddCategory, Addrecord, Header } from "../needfull/idnex";
+import { useEffect, useState } from "react";
+import {
+  AddCategory,
+  Addrecord,
+  AddrecordText,
+  Header,
+} from "../needfull/idnex";
 import { Eye, Leadingicon, Plus } from "../svg";
 
 export const RecordPage = () => {
+  const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
+  const addCategory = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/category`);
+      if (!response.ok) throw new Error(`HTPP error ${response.status}`);
+      const responseData = await response.json();
+      setCategories(responseData);
+    } catch (error) {
+      console.log(error);
+      setError("category backend-ees avhd aldaa garlaa");
+    }
+  };
+  useEffect(() => {
+    addCategory();
+  }, []);
   return (
     <div className=" ">
       <Header />
@@ -82,13 +104,25 @@ export const RecordPage = () => {
                         <h3 className="text-gray-400">clear</h3>
                       </button>
                     </div>
-                    <div className="flex gap-3 items-center">
-                      <label className="swap">
-                        <input type="checkbox" />
-                        <Leadingicon className="swap-off fill-current" />
-                        <Eye className="swap-on fill-current" />
-                      </label>
-                      <h3 className="font-normal">Food & Drink</h3>
+                    <div className="flex flex-col justify-center">
+                      {categories.length > 0 ? (
+                        categories.map((category, index) => (
+                          <div key={index} className="flex gap-3  items-center">
+                            <div>
+                              <label className="swap">
+                                <input type="checkbox" />
+                                <Leadingicon className="swap-off fill-current" />
+                                <Eye className="swap-on fill-current" />
+                              </label>
+                            </div>
+                            <div>
+                              <h3 className="font-normal">{category.name}</h3>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <p>loading...</p>
+                      )}
                     </div>
                     <div>
                       <button
@@ -115,27 +149,7 @@ export const RecordPage = () => {
             </div>{" "}
           </div>
           <div className="w-full">
-            <div className="flex items-center justify-between ">
-              <div>
-                <h3>Last 30 Days</h3>
-              </div>
-              <div className="dropdown dropdown-bottom dropdown-end">
-                <div tabIndex={0} role="button" className="btn m-1 bg-white">
-                  Newest fisrt
-                </div>
-                <ul
-                  tabIndex={0}
-                  className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
-                >
-                  <li>
-                    <a>7 week ago</a>
-                  </li>
-                  <li>
-                    <a>14 week ago</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <AddrecordText />
           </div>
         </div>
       </div>

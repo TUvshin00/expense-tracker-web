@@ -4,5 +4,6 @@ export * from "./IncomeCard";
 export * from "./ExpenseCard";
 export * from "./GeldCard";
 export * from "./Header";
-export * from './Addrecord'
-export * from "./AddCategory"
+export * from "./Addrecord";
+export * from "./AddCategory";
+export * from "./AddRecordText";

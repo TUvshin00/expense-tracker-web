@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import {
   BiBrush,
   BiLogoSteam,
@@ -7,6 +9,61 @@ import {
   BiSolidDrink,
 } from "react-icons/bi";
 export const AddCategory = () => {
+  const [dropDown, setDropDown] = useState(false);
+  const [selectedCategoryName, setSelectedCategoryName] = useState("une");
+  const [selectedIcon, setSelectedIcon] = useState("une");
+  const [selectedColor, setSelectedColor] = useState("bg-red-600");
+  const icons = [
+    { icon: <BiPurchaseTag />, name: "une" },
+    { icon: <BiBrush />, name: "brush" },
+    { icon: <BiLogoSteam />, name: "steam" },
+    { icon: <BiSolidBook />, name: "book" },
+    { icon: <BiSolidDrink />, name: "uuh yum" },
+    { icon: <BiSolidContact />, name: "holboo" },
+  ];
+  const colors = [
+    "bg-red-600",
+    "bg-slate-600",
+    "bg-green-600",
+    "bg-orange-600",
+    "bg-purple-600",
+    "bg-yellow-600",
+  ];
+  const handleInputChange = (event) => {
+    setSelectedCategoryName(event.target.value);
+  };
+  const handleClickIcon = (icon, name) => {
+    setSelectedIcon(name);
+    setSelectedCategoryName(name);
+    setDropDown(false);
+  };
+
+  const handleCreateSubmit = async (event) => {
+    event.preventDefault();
+    const category = {
+      name: selectedCategoryName,
+      category_icon: selectedIcon,
+      icon_color: selectedColor,
+    };
+
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "content-Type": "application/json",
+        },
+        body: JSON.stringify(category),
+      };
+      const response = await fetch(`http://localhost:8000/category`, options);
+      if (!response.ok) throw new Error(`HTPP error ${response.status}`);
+      const data = await response.json();
+      console.log("category added ", data);
+      document.getElementById("my_modal_2").close();
+    } catch (error) {
+      console.error("category backend-ees avhd aldaa garlaa");
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-col gap-5">
@@ -17,7 +74,6 @@ export const AddCategory = () => {
             </div>
             <div>
               <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                   ✕
                 </button>
@@ -28,87 +84,57 @@ export const AddCategory = () => {
         <div className="p-6">
           <div className="flex">
             <label htmlFor="my_modal_7">
-              <svg
-                width="84"
-                height="48"
-                viewBox="0 0 84 48"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              {/* homeasv */}
+              <button
+                onClick={() => setDropDown(!dropDown)}
+                className={`${selectedColor} w-12 h-12 flex items-center justify-center rounded-lg`}
               >
-                <path
-                  d="M0.5 8C0.5 3.85787 3.85786 0.5 8 0.5H76C80.1421 0.5 83.5 3.85786 83.5 8V40C83.5 44.1421 80.1421 47.5 76 47.5H8C3.85786 47.5 0.5 44.1421 0.5 40V8Z"
-                  fill="#F9FAFB"
-                />
-                <path
-                  d="M0.5 8C0.5 3.85787 3.85786 0.5 8 0.5H76C80.1421 0.5 83.5 3.85786 83.5 8V40C83.5 44.1421 80.1421 47.5 76 47.5H8C3.85786 47.5 0.5 44.1421 0.5 40V8Z"
-                  stroke="#D1D5DB"
-                />
-                <path
-                  d="M37 22.8328V31.5C37 31.8978 36.842 32.2793 36.5607 32.5607C36.2794 32.842 35.8978 33 35.5 33H31.75C31.3522 33 30.9706 32.842 30.6893 32.5607C30.408 32.2793 30.25 31.8978 30.25 31.5V27.75C30.25 27.5511 30.171 27.3603 30.0303 27.2197C29.8897 27.079 29.6989 27 29.5 27H26.5C26.3011 27 26.1103 27.079 25.9697 27.2197C25.829 27.3603 25.75 27.5511 25.75 27.75V31.5C25.75 31.8978 25.592 32.2793 25.3107 32.5607C25.0294 32.842 24.6478 33 24.25 33H20.5C20.1022 33 19.7206 32.842 19.4393 32.5607C19.158 32.2793 19 31.8978 19 31.5V22.8328C19 22.6252 19.043 22.4199 19.1265 22.2298C19.2099 22.0397 19.3319 21.8689 19.4847 21.7284L26.9847 14.6522L26.995 14.6419C27.2711 14.3907 27.631 14.2516 28.0042 14.2516C28.3775 14.2516 28.7373 14.3907 29.0134 14.6419C29.0166 14.6455 29.0201 14.649 29.0238 14.6522L36.5238 21.7284C36.675 21.8697 36.7954 22.0407 36.8774 22.2308C36.9594 22.4209 37.0011 22.6258 37 22.8328Z"
-                  fill="#343330"
-                />
-                <path
-                  d="M55.3 26.3L52.7 23.7C52.3833 23.3833 52.3125 23.0208 52.4875 22.6125C52.6625 22.2042 52.975 22 53.425 22H58.575C59.025 22 59.3375 22.2042 59.5125 22.6125C59.6875 23.0208 59.6166 23.3833 59.3 23.7L56.7 26.3C56.6 26.4 56.4916 26.475 56.375 26.525C56.2583 26.575 56.1333 26.6 56 26.6C55.8666 26.6 55.7416 26.575 55.625 26.525C55.5083 26.475 55.4 26.4 55.3 26.3Z"
-                  fill="#1F2937"
-                />
-              </svg>
+                {icons.find((icon) => icon.name === selectedIcon)?.icon}
+              </button>
             </label>
-
-            <input type="checkbox" id="my_modal_7" className="modal-toggle" />
-            <div className="modal" role="dialog">
-              <div className="modal-box grid grid-cols-6 justify-items-center ">
-                <button>
-                  <BiPurchaseTag />
-                </button>
-                <button>
-                  <BiBrush />
-                </button>
-                <button>
-                  <BiLogoSteam />
-                </button>
-                <button>
-                  <BiSolidBook />
-                </button>
-                <button>
-                  <BiSolidDrink />
-                </button>
-                <button>
-                  <BiSolidContact />
-                </button>
-                <button></button>
-                <button></button>
-                <button></button>
-                <button></button>
-                <button></button>
-                <button></button>
+            {dropDown && (
+              <div className="flex flex-col">
+                <div className="absolute w-32 h-32 grid grid-rows-3 grid-cols-2 justify-items-center z-10 bg-white shadow-lg rounded-md">
+                  {icons.map((icon, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleClickIcon(icon.icon, icon.name)}
+                      className="flex items-center p-2 hover:bg-gray-200"
+                    >
+                      {icon.icon}
+                    </button>
+                  ))}
+                </div>
               </div>
+            )}
 
-              <label className="modal-backdrop" htmlFor="my_modal_7">
-                Close
-              </label>
-            </div>
             <div>
               <input
                 type="text"
+                value={selectedCategoryName}
+                onChange={handleInputChange}
                 placeholder="name"
                 className="h-[48px] p-4 w-[350px] ml-4 bg-slate-100 rounded-lg"
               />
             </div>
           </div>
+          <div className="flex gap-4 justify-center items-center mt-5">
+            {colors.map((color, index) => (
+              <div key={index} className="flex">
+                <button
+                  onClick={() => setSelectedColor(color)}
+                  className={`w-8 h-8 ${color} rounded-lg`}
+                ></button>
+              </div>
+            ))}
+          </div>
           <div className="mt-6">
-            <svg
-              width="446"
-              height="40"
-              viewBox="0 0 446 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            <button
+              onClick={handleCreateSubmit}
+              className="h-10 w-full rounded-lg bg-green-600 text-xl text-white"
             >
-              <rect width="446" height="40" rx="20" fill="#16A34A" />
-              <path
-                d="M214.031 14.6328L210.266 25H208.727L213.062 13.625H214.055L214.031 14.6328ZM217.188 25L213.414 14.6328L213.391 13.625H214.383L218.734 25H217.188ZM216.992 20.7891V22.0234H210.602V20.7891H216.992ZM225.367 23.3594V13H226.82V25H225.492L225.367 23.3594ZM219.68 20.8672V20.7031C219.68 20.0573 219.758 19.4714 219.914 18.9453C220.076 18.4141 220.302 17.9583 220.594 17.5781C220.891 17.1979 221.242 16.9062 221.648 16.7031C222.06 16.4948 222.518 16.3906 223.023 16.3906C223.555 16.3906 224.018 16.4844 224.414 16.6719C224.815 16.8542 225.154 17.1224 225.43 17.4766C225.711 17.8255 225.932 18.2474 226.094 18.7422C226.255 19.237 226.367 19.7969 226.43 20.4219V21.1406C226.372 21.7604 226.26 22.3177 226.094 22.8125C225.932 23.3073 225.711 23.7292 225.43 24.0781C225.154 24.4271 224.815 24.6953 224.414 24.8828C224.013 25.0651 223.544 25.1562 223.008 25.1562C222.513 25.1562 222.06 25.0495 221.648 24.8359C221.242 24.6224 220.891 24.3229 220.594 23.9375C220.302 23.5521 220.076 23.099 219.914 22.5781C219.758 22.0521 219.68 21.4818 219.68 20.8672ZM221.133 20.7031V20.8672C221.133 21.2891 221.174 21.6849 221.258 22.0547C221.346 22.4245 221.482 22.75 221.664 23.0312C221.846 23.3125 222.078 23.5339 222.359 23.6953C222.641 23.8516 222.977 23.9297 223.367 23.9297C223.846 23.9297 224.24 23.8281 224.547 23.625C224.859 23.4219 225.109 23.1536 225.297 22.8203C225.484 22.487 225.63 22.125 225.734 21.7344V19.8516C225.672 19.5651 225.581 19.2891 225.461 19.0234C225.346 18.7526 225.195 18.513 225.008 18.3047C224.826 18.0911 224.599 17.9219 224.328 17.7969C224.062 17.6719 223.747 17.6094 223.383 17.6094C222.987 17.6094 222.646 17.6927 222.359 17.8594C222.078 18.0208 221.846 18.2448 221.664 18.5312C221.482 18.8125 221.346 19.1406 221.258 19.5156C221.174 19.8854 221.133 20.2812 221.133 20.7031ZM234.398 23.3594V13H235.852V25H234.523L234.398 23.3594ZM228.711 20.8672V20.7031C228.711 20.0573 228.789 19.4714 228.945 18.9453C229.107 18.4141 229.333 17.9583 229.625 17.5781C229.922 17.1979 230.273 16.9062 230.68 16.7031C231.091 16.4948 231.549 16.3906 232.055 16.3906C232.586 16.3906 233.049 16.4844 233.445 16.6719C233.846 16.8542 234.185 17.1224 234.461 17.4766C234.742 17.8255 234.964 18.2474 235.125 18.7422C235.286 19.237 235.398 19.7969 235.461 20.4219V21.1406C235.404 21.7604 235.292 22.3177 235.125 22.8125C234.964 23.3073 234.742 23.7292 234.461 24.0781C234.185 24.4271 233.846 24.6953 233.445 24.8828C233.044 25.0651 232.576 25.1562 232.039 25.1562C231.544 25.1562 231.091 25.0495 230.68 24.8359C230.273 24.6224 229.922 24.3229 229.625 23.9375C229.333 23.5521 229.107 23.099 228.945 22.5781C228.789 22.0521 228.711 21.4818 228.711 20.8672ZM230.164 20.7031V20.8672C230.164 21.2891 230.206 21.6849 230.289 22.0547C230.378 22.4245 230.513 22.75 230.695 23.0312C230.878 23.3125 231.109 23.5339 231.391 23.6953C231.672 23.8516 232.008 23.9297 232.398 23.9297C232.878 23.9297 233.271 23.8281 233.578 23.625C233.891 23.4219 234.141 23.1536 234.328 22.8203C234.516 22.487 234.661 22.125 234.766 21.7344V19.8516C234.703 19.5651 234.612 19.2891 234.492 19.0234C234.378 18.7526 234.227 18.513 234.039 18.3047C233.857 18.0911 233.63 17.9219 233.359 17.7969C233.094 17.6719 232.779 17.6094 232.414 17.6094C232.018 17.6094 231.677 17.6927 231.391 17.8594C231.109 18.0208 230.878 18.2448 230.695 18.5312C230.513 18.8125 230.378 19.1406 230.289 19.5156C230.206 19.8854 230.164 20.2812 230.164 20.7031Z"
-                fill="#F9FAFB"
-              />
-            </svg>
+              <p>add</p>
+            </button>
           </div>
         </div>
       </div>
