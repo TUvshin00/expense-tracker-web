@@ -13,8 +13,6 @@ server.use(cors());
 
 const sql = neon(`${process.env.BACKEND_URL}`);
 
-console.log(BACKEND_URL);
-
 server.post("/category", async (request, response) => {
   const { name, category_icon, icon_color } = request.body;
   try {
@@ -40,6 +38,27 @@ server.get("/category", async (request, response) => {
   } catch (error) {
     console.log(error);
     response.status(500).json({ message: "category nemegdej chadsangui " });
+  }
+});
+server.post("/record", async (request, response) => {
+  const { name, descrption, category_icon, icon_color } = request.body;
+  try {
+    const record =
+      await sql`INSERT INTO record (name, descrption, category_icon, icon_color) VALUES (${name} ${descrption} ${category_icon} ${icon_color}) RETURONG *`;
+    response.status(201).json({ message: "record message orj chadlaa" });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ message: "record message orj chadsngu" });
+  }
+});
+server.get("/record", async (request, response) => {
+  try {
+    const record = await sql`SELECT * FROM record ORDER BY createdat DESC`;
+
+    response.status(201).json(category);
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ message: "record nemegdej chadsangui " });
   }
 });
 

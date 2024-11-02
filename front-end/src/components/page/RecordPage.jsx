@@ -108,15 +108,15 @@ export const RecordPage = () => {
                       {categories.length > 0 ? (
                         categories.map((category, index) => (
                           <div key={index} className="flex gap-3  items-center">
-                            <div>
+                            <div className="flex flex-row items-center gap-3">
                               <label className="swap">
                                 <input type="checkbox" />
                                 <Leadingicon className="swap-off fill-current" />
                                 <Eye className="swap-on fill-current" />
                               </label>
-                            </div>
-                            <div>
-                              <h3 className="font-normal">{category.name}</h3>
+                              <div>
+                                <h3 className="font-normal">{category.name}</h3>
+                              </div>
                             </div>
                           </div>
                         ))

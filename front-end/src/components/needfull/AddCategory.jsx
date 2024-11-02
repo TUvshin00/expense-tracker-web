@@ -28,6 +28,7 @@ export const AddCategory = () => {
     "bg-orange-600",
     "bg-purple-600",
     "bg-yellow-600",
+    "bg-black",
   ];
   const handleInputChange = (event) => {
     setSelectedCategoryName(event.target.value);
@@ -84,7 +85,6 @@ export const AddCategory = () => {
         <div className="p-6">
           <div className="flex">
             <label htmlFor="my_modal_7">
-              {/* homeasv */}
               <button
                 onClick={() => setDropDown(!dropDown)}
                 className={`${selectedColor} w-12 h-12 flex items-center justify-center rounded-lg`}
