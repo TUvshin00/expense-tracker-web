@@ -1,7 +1,49 @@
-import { document } from "postcss";
+"use client";
+import { useState } from "react";
 import { BlueButton } from "./BlueButton";
 
 export const Addrecord = () => {
+  const [selectedRecordName, setSelectedRecordName] = useState();
+  const [selectedAmount, setSelectedAmount] = useState();
+  const [typeTransaction, setTypeTransaction] = useState();
+  const [typeCreadet, setTypeCreadet] = useState();
+  const [categoryId, setCategoryId] = useState();
+  const handleName = (event) => {
+    setSelectedRecordName(event.target.value);
+  };
+  const handleAmount = (event) => {
+    setSelectedAmount(event.target.value);
+  };
+  const handleTransaction = (event) => {
+    setTypeTransaction(event.target.value);
+  };
+  const handleDate = (event) => {
+    setTypeCreadet(event.target.value);
+  };
+  const handleCreateSubmit = async (event) => {
+    event.preventDefault();
+    const record = {
+      name: selectedRecordName,
+      amount: selectedAmount,
+      transaction_type: typeTransaction,
+      creadet_at: typeCreadet,
+      category_id: categoryId,
+    };
+
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "content-Type": "application/json",
+        },
+        body: JSON.stringify(record),
+      };
+      const response = await fetch(`http://localhost:8000/record`, options);
+      if (!response.ok) throw new Error(`HTPP error ${response.status}`);
+      const data = await response.json();
+      console.log("record added ", data);
+    } catch (error) {}
+  };
   return (
     <div className="w-[798px] bg-white ">
       <div>
@@ -35,7 +77,7 @@ export const Addrecord = () => {
               </div>
               <div className="flex flex-col gap-5">
                 <div>
-                  <h3>Amount</h3>
+                  <h3 onClick={handleAmount}>Amount</h3>
                   <input
                     className="bg-[#D1D5DB] w-[348px] h-[76px] text-gray-400 rounded-lg "
                     placeholder="$000"
@@ -43,15 +85,15 @@ export const Addrecord = () => {
                   />
                 </div>
                 <div>
-                  <h3>Category</h3>
                   <input
-                    type="button"
+                    type="text"
                     placeholder="Choose"
+                    onClick={handleTransaction}
                     className="bg-[#D1D5DB] text-gray-400 w-[348px] rounded-lg h-[24px] text-left"
                   />
                 </div>
                 <div>
-                  <h3>Date</h3>
+                  <h3 onClick={handleDate}>Date</h3>
                   <div className="flex gap-[10px]">
                     <input
                       type="date"
@@ -63,13 +105,18 @@ export const Addrecord = () => {
                     />
                   </div>
                 </div>
-                <BlueButton text="Add record" />
+                <button
+                  onClick={handleCreateSubmit}
+                  className="h-10 w-full rounded-lg bg-blue-600 text-xl text-white"
+                >
+                  <p>add</p>
+                </button>
               </div>
             </div>
           </div>
           <div className="flex flex-col px-6 py-5 gap-6 w-full">
             <div>
-              <h3>Name</h3>
+              <h3 onClick={handleName}>Name</h3>
               <input
                 type="text"
                 placeholder="Write here"

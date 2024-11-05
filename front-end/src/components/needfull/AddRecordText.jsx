@@ -46,7 +46,7 @@ export const AddrecordText = () => {
         </div>
       </div>
       <div>
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center gap-5">
           {recordText.length > 0 ? (
             recordText.map((record, index) => (
               <div key={index} className=" gap-3 w-[867px] h-16 border-2 ">
