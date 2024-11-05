@@ -138,6 +138,7 @@ export const RecordPage = () => {
                         <div className="modal-box  w-full p-0">
                           <AddCategory />
                         </div>
+
                         <form method="dialog" className="modal-backdrop">
                           <button onClick={() => document.close}>close</button>
                         </form>
