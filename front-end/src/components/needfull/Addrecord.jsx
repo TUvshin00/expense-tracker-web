@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { BlueButton } from "./BlueButton";
 
 export const Addrecord = () => {
   const [typeTransaction, setTypeTransaction] = useState("EXP");
@@ -10,14 +9,14 @@ export const Addrecord = () => {
     name: "",
     amount: "",
     transaction_type: typeTransaction,
-    creadet_at: "",
-    category_id: "",
+    created_at: "",
   });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setRecords((prevRecords) => ({ ...prevRecords, [name]: value }));
   };
+  console.log(records);
 
   const fetchRecord = async (event) => {
     event.preventDefault();
@@ -35,8 +34,7 @@ export const Addrecord = () => {
         name: "",
         amount: "",
         transaction_type: typeTransaction,
-        creadet_at: "",
-        category_id: "",
+        created_at: "",
       });
     } catch (error) {
       console.error("error", error);
@@ -84,9 +82,10 @@ export const Addrecord = () => {
                     <input
                       className="bg-[#D1D5DB] w-[348px] h-[76px] text-gray-400 rounded-lg "
                       placeholder="$000"
-                      type="text"
+                      name="amount"
                       value={records.amount}
                       onChange={handleInputChange}
+                      type="text"
                     />
                   </div>
                   <div>
@@ -101,19 +100,24 @@ export const Addrecord = () => {
                     <div className="flex gap-[10px]">
                       <input
                         type="date"
-                        value={records.creadet_at}
+                        name="created_at"
+                        value={records.created_at}
                         onChange={handleInputChange}
                         className="bg-[#D1D5DB] text-gray-400 rounded-lg w-[168px] h-11"
                       />
                       <input
                         type="time"
-                        value={records.creadet_at}
+                        name="created_at"
+                        value={records.created_at}
                         onChange={handleInputChange}
                         className="bg-[#D1D5DB] text-gray-400 rounded-lg w-[168px] h-11"
                       />
                     </div>
                   </div>
-                  <button className="h-10 w-full rounded-lg bg-blue-600 text-xl text-white">
+                  <button
+                    type="submit"
+                    className="h-10 w-full rounded-lg bg-blue-600 text-xl text-white"
+                  >
                     <p>add</p>
                   </button>
                 </div>
@@ -123,6 +127,7 @@ export const Addrecord = () => {
                     <input
                       type="text"
                       value={records.name}
+                      name="name"
                       onChange={handleInputChange}
                       placeholder="Write here"
                       className="bg-[#D1D5DB] w-[292px] h-6 text-gray-400 rounded-lg  text-start"

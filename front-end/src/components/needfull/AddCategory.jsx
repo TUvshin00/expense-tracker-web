@@ -123,7 +123,7 @@ export const AddCategory = () => {
               <div key={index} className="flex">
                 <button
                   onClick={() => setSelectedColor(color)}
-                  className={`w-8 h-8 ${color} rounded-lg`}
+                  className={`w-8 h-8 ${color} rounded-full`}
                 ></button>
               </div>
             ))}
