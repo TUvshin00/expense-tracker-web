@@ -10,8 +10,8 @@ import {
 } from "react-icons/bi";
 export const AddCategory = () => {
   const [dropDown, setDropDown] = useState(false);
-  const [selectedCategoryName, setSelectedCategoryName] = useState("une");
-  const [selectedIcon, setSelectedIcon] = useState("une");
+  const [selectedCategoryName, setSelectedCategoryName] = useState("price");
+  const [selectedIcon, setSelectedIcon] = useState("price");
   const [selectedColor, setSelectedColor] = useState("bg-red-600");
   const icons = [
     { icon: <BiPurchaseTag />, name: "price" },
