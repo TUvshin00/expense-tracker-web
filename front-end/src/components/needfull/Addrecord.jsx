@@ -41,9 +41,6 @@ export const Addrecord = () => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchRecord();
-  // }, []);
   return (
     <div className="w-[798px] bg-white ">
       <div>
@@ -89,7 +86,7 @@ export const Addrecord = () => {
                     />
                   </div>
                   <div>
-                    <input
+                    <select
                       type="text"
                       placeholder="Choose"
                       className="bg-[#D1D5DB] text-gray-400 w-[348px] rounded-lg h-[24px] text-left"

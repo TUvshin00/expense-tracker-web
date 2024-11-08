@@ -86,6 +86,7 @@ export const AddCategory = () => {
           <div className="flex">
             <label htmlFor="my_modal_7">
               <button
+                bvb
                 onClick={() => setDropDown(!dropDown)}
                 className={`${selectedColor} w-12 h-12 flex items-center justify-center rounded-lg`}
               >

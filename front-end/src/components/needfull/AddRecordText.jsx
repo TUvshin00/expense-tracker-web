@@ -16,12 +16,14 @@ export const AddrecordText = () => {
       console.log(setRecordText);
     } catch (error) {
       console.log(error);
-      setError("category backend-ees avhd aldaa garlaa");
+      setError("record backend-ees avhd aldaa garlaa");
     }
   };
+
   useEffect(() => {
     addRecordText();
   }, []);
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between ">
