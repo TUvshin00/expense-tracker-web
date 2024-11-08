@@ -14,12 +14,12 @@ export const AddCategory = () => {
   const [selectedIcon, setSelectedIcon] = useState("une");
   const [selectedColor, setSelectedColor] = useState("bg-red-600");
   const icons = [
-    { icon: <BiPurchaseTag />, name: "une" },
+    { icon: <BiPurchaseTag />, name: "price" },
     { icon: <BiBrush />, name: "brush" },
     { icon: <BiLogoSteam />, name: "steam" },
     { icon: <BiSolidBook />, name: "book" },
-    { icon: <BiSolidDrink />, name: "uuh yum" },
-    { icon: <BiSolidContact />, name: "holboo" },
+    { icon: <BiSolidDrink />, name: "drink" },
+    { icon: <BiSolidContact />, name: "contacts" },
   ];
   const colors = [
     "bg-red-600",
@@ -61,7 +61,7 @@ export const AddCategory = () => {
       console.log("category added ", data);
       document.getElementById("my_modal_2").close();
     } catch (error) {
-      console.error("category backend-ees avhd aldaa garlaa");
+      console.error("category oruulhd aldaa garlaa");
     }
   };
 
@@ -86,7 +86,6 @@ export const AddCategory = () => {
           <div className="flex">
             <label htmlFor="my_modal_7">
               <button
-                bvb
                 onClick={() => setDropDown(!dropDown)}
                 className={`${selectedColor} w-12 h-12 flex items-center justify-center rounded-lg`}
               >

@@ -27,7 +27,7 @@ export const RecordPage = () => {
     addCategory();
   }, []);
   return (
-    <div className=" ">
+    <div>
       <Header />
       <div className="bg-[#F3F4F6] w-full h-screen ">
         <div className="flex max-w-[1440px] w-full px-[120px] m-auto gap-6 py-20 ">
