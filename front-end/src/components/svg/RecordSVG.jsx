@@ -1,4 +1,4 @@
-import { Addrecord } from "../needfull/Addrecord";
+import { Addrecord } from "../need/Addrecord";
 
 export const RecordSVG = () => {
   return (

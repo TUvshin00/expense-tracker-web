@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Icon from "../svg/Icon";
-import { BlueButton, Input1 } from "../needfull/idnex";
+import { BlueButton, Input1 } from "../need/idnex";
 
 export const SignUpPage = () => {
   return (

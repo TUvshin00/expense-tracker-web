@@ -1,7 +1,7 @@
 "use client";
-import { IncomeCard } from "../needfull/IncomeCard";
-import { ExpenseCard, GeldCard } from "../needfull/idnex";
-import { Header } from "../needfull/Header";
+import { IncomeCard } from "../need/IncomeCard";
+import { ExpenseCard, GeldCard } from "../need/idnex";
+import { Header } from "../need/Header";
 
 export const DashBoard = () => {
   return (

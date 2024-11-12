@@ -1,12 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  AddCategory,
-  Addrecord,
-  AddrecordText,
-  Header,
-} from "../needfull/idnex";
+import { AddCategory, Addrecord, AddrecordText, Header } from "../need/idnex";
 import { Eye, Leadingicon, Plus } from "../svg";
 
 export const RecordPage = () => {
