@@ -102,13 +102,6 @@ export const Addrecord = () => {
                         onChange={handleInputChange}
                         className="bg-[#D1D5DB] text-gray-400 rounded-lg w-[168px] h-11"
                       />
-                      <input
-                        type="time"
-                        name="created_at"
-                        value={records.created_at}
-                        onChange={handleInputChange}
-                        className="bg-[#D1D5DB] text-gray-400 rounded-lg w-[168px] h-11"
-                      />
                     </div>
                   </div>
                   <button
